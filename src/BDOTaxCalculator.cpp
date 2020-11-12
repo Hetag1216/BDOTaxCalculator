@@ -2,7 +2,7 @@
 using namespace std;
 #define tax 35
 double bonus;
-int price;
+long long price;
 string valuePack;
 double getVersion();
 string getAuthor();
@@ -32,7 +32,7 @@ void application() {
         bonus = bonus + 1.3;
     }
     cout << "\nFinal bonus -> " << bonus << endl;
-    int result = taxedPrice;
+    long long result = taxedPrice;
     if (bonus != 0) {
     result = taxedPrice * bonus;
     }
@@ -40,7 +40,7 @@ void application() {
 }
 
 double getVersion() {
-    return 1.0;
+    return 1.1;
 }
 
 string getAuthor() {
