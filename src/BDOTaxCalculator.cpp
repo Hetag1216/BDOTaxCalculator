@@ -1,46 +1,43 @@
 #include <iostream>
+#include "Calculator.h"
 using namespace std;
-#define tax 35
-double bonus;
-long long price;
-string valuePack;
-double getVersion();
+double price;
+float family_bonus;
+float getVersion();
 string getAuthor();
 string getName();
 string getDescription();
-void application();
-
 int main() {
     cout << getDescription() << endl;
     cout << getName() << "" <<  " v" << getVersion() << " by " << getAuthor() << endl;
-    application();
 
-}
-
-void application() {
     cout << endl;
+
     cout << "Insert item's price -> ";
     cin >> price;
+    if (cin.fail()) {
+        exit(1);
+    }
+    cout << "Insert family's bonus (Insert 0 to not calculate family's bonus) -> ";
+    cin >> family_bonus;
+    if (cin.fail()) {
+        exit(1);
+    }
+    cout << endl;
+    cout.precision(10);
     cout << "Given item's price -> " << price << endl;
-    int taxedPrice = price * tax / 100;
-    cout << "\nBasic Marketplace's tax -> " << tax << endl;
-    taxedPrice = price - taxedPrice;
-    cout << "Marketplace's taxed value (without ANY bonuses) -> " << taxedPrice << endl;
-    cout << "\nIs value pack enabled? (true/false) -> ";
-    cin >> valuePack;
-    if (valuePack == "true") {
-        bonus = bonus + 1.3;
-    }
-    cout << "\nFinal bonus -> " << bonus << endl;
-    long long result = taxedPrice;
-    if (bonus != 0) {
-    result = taxedPrice * bonus;
-    }
-    cout << "Received loan after Marketplace's taxation -> " << result;
+    cout << endl;
+    cout << "Given family's bonus -> " << family_bonus << endl;
+    cout << endl;
+    Calculator calc(price);
+    cout << "ValuePack Disabled -> " << calc.getFinalValue(false, family_bonus) << endl;
+    cout << "ValuePack Enabled -> " << calc.getFinalValue(true, family_bonus) << endl;
+    cout << endl;
+    exit(1);
 }
 
-double getVersion() {
-    return 1.1;
+float getVersion() {
+    return 1.2;
 }
 
 string getAuthor() {
